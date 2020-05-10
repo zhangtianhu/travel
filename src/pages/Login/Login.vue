@@ -1,6 +1,6 @@
 <template>
   <transition name="el-fade-in-linear">
-    <div class="body" v-show="!this.mobileLogin">
+    <div class="body">
     <span style="font-weight:bold;font-size:36px;margin-bottom:60px;margin-top:66px">TRAVEL</span>
       <el-input placeholder="手机或邮箱" type="mobile" v-model="username">
         <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { mapState} from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -30,9 +29,6 @@ export default {
       username: '',
       password: ''
     }
-  },
-  computed: {
-    ...mapState(['mobileLogin'])
   },
   methods: {
     login: function (e) {
@@ -74,8 +70,12 @@ export default {
     flex-direction column
     align-items center
     width 100%
+    height 100%
+    background-image:url("./login.jpeg")
+    opacity 0.9
     .el-input
       width 5.7rem
+      opacity 0.7
       &:nth-child(1)
         margin-top .8rem
       &:nth-child(2)
