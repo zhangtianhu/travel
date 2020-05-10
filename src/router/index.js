@@ -4,6 +4,7 @@ import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail.vue'
 import Me from '@/pages/detail/Me.vue'
+import news from '@/pages/detail/news.vue'
 import Person from '@/pages/detail/Person.vue'
 import weekend from '@/pages/home/components/weekend.vue'
 import Bangdan from '@/pages/home/components/Bangdan'
@@ -30,6 +31,11 @@ export default new Router({
     path: '/Me',
     name: 'Me',
     component: Me
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: news
   },
   {
     path: '/Person',
