@@ -39,6 +39,7 @@
         axios.get('/api/detail.json?id=' + this.$route.params.id).then(this.handleGetDataSucc)
       },
       handleGetDataSucc (res) {
+        console.log(res)
         res = res.data
         if (res.ret && res.data) {
           const data = res.data

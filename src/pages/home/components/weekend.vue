@@ -8,13 +8,13 @@
             <ListItemMeta  :title="item.title" :description="item.description" />
             <div style="padding:10px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.content }}</div>
             <template slot="action" >
-                <li style="margin-left:60px;color:rgb(248,197,74)">
-                    <Icon type="ios-star-outline" /> 123
+                <li style="margin-left:66px;font-size:18px">
+                    <Icon type="ios-star-outline"  :class="{changeColor}" v-on:click="star"/><span :class="{changeColor}"> {{count}}</span>
                 </li>
-                <li style="margin-left:10px;color:rgb(248,197,74)">
+                <li style="margin-left:10px;color:rgb(248,197,74);font-size:18px">
                     <Icon type="ios-thumbs-up-outline" /> 234
                 </li>
-                <li style="margin-left:10px;color:rgb(248,197,74)">
+                <li style="margin-left:10px;color:rgb(248,197,74);font-size:18px">
                     <Icon type="ios-chatbubbles-outline" /> 345
                 </li>
             </template>
@@ -34,6 +34,8 @@ import HomeTab from './Tab'
 		},
         data () {
             return {
+                changeColor: false,
+                count:123,
                 data: [
                   {
                         title: '西沙群岛',
@@ -67,6 +69,19 @@ import HomeTab from './Tab'
                     }
                 ]
             }
+        },
+        methods:{
+            star(){
+               this.changeColor =!this.changeColor
+               this.count+=1
+               console.log(this.count,this.changeColor)
+            },
+            console:function(){
+                console.log(this.data)
+            }
+        },
+        mounted(){
+            this.console()
         }
     }
 </script>
@@ -76,4 +91,8 @@ import HomeTab from './Tab'
     color:#2e57bc;
     font-weight: bold;
     margin-left :10px}
+.changeColor{
+        color:rgb(248,197,74);
+
+    }
 </style>

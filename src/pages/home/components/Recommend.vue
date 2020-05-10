@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">热销推荐</div>
-    <ul>
+    <ul @click="console">
       <router-link tag='li' class="item" v-for="item of list" :to="'/detail/' + item.id" :key="item.id">
           <img :src="item.imgUrl" class="item-img" :key="item.id"/>
         <div class="item-info">
@@ -19,6 +19,11 @@
     name: 'HomeRecommend',
     props: {
       list: Array
+    },
+    methods:{
+      console:function(){
+        console.log("{data: {…}, status: 200, statusText: 'OK', headers: {…}, config: {…}, …} config: {adapter: ƒ, transformRequest: {…}, transformResponse: {…}, timeout: 0, xsrfCookieName: 'XSRF-TOKEN', …}")
+      }
     }
   }
 </script>
