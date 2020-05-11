@@ -40,8 +40,6 @@ export default {
         return
       }
       this.$emit('register')
-      this.username = ''
-      this.password = ''
 
       let mobile = this.username
       let password = this.password
