@@ -21,6 +21,7 @@
 
 <script>
 import axios from 'axios'
+import { Loading } from 'element-ui';
 
 export default {
   name: "Login",
@@ -32,10 +33,12 @@ export default {
   },
   methods: {
     login: function (e) {
+      let loading = Loading.service({ fullscreen: true });
       axios.post('http://localhost:10000/user/user/login',{
         'username': this.username,
         'password': this.password
       }).then(res => {
+        console.log(res.data)
         res = res.data
         if(res.code !== 200) {
           this.$nextTick(() => {
