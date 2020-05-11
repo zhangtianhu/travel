@@ -29,7 +29,20 @@ export default {
     }
   },
   methods: {
-    check: function (e) {
+    check: function(e) {
+      let mobilePattern = /^1[3|4|5|8][0-9]\d{4,8}$/
+      let passowrdPattern = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+      let mobilePatternReg = new RegExp(mobilePattern)
+      let passowrdPatternReg = new RegExp(passowrdPattern)
+      this.isInputColor = !mobilePatternReg.test(this.username)
+      this.isColor = !passowrdPatternReg.test(this.password)
+      if(this.isInputColor || this.isColor) {
+        return
+      }
+      this.$emit('register')
+      this.username = ''
+      this.password = ''
+
       let mobile = this.username
       let password = this.password
       axios.post('http://localhost:10000/user/user/register', {
