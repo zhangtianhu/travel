@@ -52,7 +52,7 @@ import axios from 'axios'
         },
         methods:{
             get(){
-                axios.get("https://scenicspot.market.alicloudapi.com")
+                axios.post("http://localhost:10000/user/user/message")
                 .then(function (res) {console.log(res.data)})
             　　}
         }

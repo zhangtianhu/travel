@@ -67,7 +67,14 @@
 		      .then((res)=>{
                   console.log(res.data.newslist)
                   for(let i =0 ;i<res.data.newslist.length;i++){
-                        res.data.newslist.splice(res.data.newslist.findIndex(item=>item.picUrl ===""),1)
+                    let data = res.data.newslist;
+                    if(data[i].picUrl==""){
+                      data[i].picUrl = "http://travel.news.cn/titlepic/112596/1125966837_1589156909312_title0h.jpg"
+                      if(data[i+1].picUrl==""){
+                        data[i+1].picUrl = "http://travel.news.cn/titlepic/112596/1125960397_1_title0h.jpg"
+                      }
+                    }
+                        // res.data.newslist.splice(res.data.newslist.findIndex(item=>item.picUrl ===""),1)
                   }
                   
                   this.news=res.data.newslist;
