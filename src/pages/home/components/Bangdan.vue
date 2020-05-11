@@ -1,60 +1,113 @@
 <template>
-    <List item-layout="vertical">
-        <ListItem v-for="item in data" :key="item.title">
-            <ListItemMeta :avatar="item.avatar" :title="item.title" :description="item.description" />
-            {{ item.content }}
-            <template slot="action">
-                <li>
-                    <Icon type="ios-star-outline" /> 123
-                </li>
-                <li>
-                    <Icon type="ios-thumbs-up-outline" /> 234
-                </li>
-                <li>
-                    <Icon type="ios-chatbubbles-outline" /> 345
-                </li>
-            </template>
-            <template slot="extra">
-                <img src="https://dev-file.iviewui.com/5wxHCQMUyrauMCGSVEYVxHR5JmvS7DpH/large" style="width: 280px">
-            </template>
-        </ListItem>
-    </List>
+<div>
+<el-row>
+  <el-col :span="20" v-for="(o, index) in len" :key="o" :offset="index > 0 ? 2 : 2">
+    <el-card :body-style="{ padding: '0px'}">
+    <div class="bangdan-card-body">
+      <img :src="news[index].sysPicurl" class="bangdan-image">
+      <div style="padding: 14px;">
+        <div class="bangdan-title">{{news[index].sysTitle}}</div>
+        <div class="bangdan-fen"><span class="fen-num">4.8</span>分</div>
+        <p>{{news[index].sysText}}</p>
+        <div class="bottom clearfix">
+          <div class="bottom-text">土著最爱</div>
+          <div class="bangdan-time">¥{{news[index].sysPrice}}起</div>
+        </div>
+      </div>
+    </div>
+    </el-card>
+  </el-col>
+</el-row>
+<home-tab></home-tab>
+</div>
 </template>
+
+<style>
+.bangdan-card-body{
+    display: flex;
+}
+  .bangdan-title{
+      font-size: 18px;
+      text-overflow: ellipsis;
+      display: block;
+      white-space: nowrap;
+      /* overflow: hidden; */
+      width: 80px;
+      height: 20px;
+      color: black;
+      font-weight: bolder;
+  }
+  .bangdan-fen{
+      color: rgb(90, 230, 183);
+      font-size: 12px;
+  }
+  .fen-num{
+      font-weight: bolder;
+  }
+  
+  .bottom {
+    display: flex;
+    margin-top: 13px;
+    line-height: 12px;
+  }
+  .bottom-text{
+    width: 51px;
+    height: 14px;
+    font-size: 11px;
+    border: 1px solid;
+    background-color: #d6fff1;
+    color: #166f5c;
+  }
+
+  .bangdan-image {
+    width: 30%;
+    height: 120px;
+    display: block;
+  }
+  .bangdan-time{
+      color: rgb(245, 194, 29);
+      margin-left: 60px;
+      font-size: 14px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  
+  .clearfix:after {
+      clear: both
+  }
+</style>
+
 <script>
-import axios from 'axios'
+    import HomeTab from './Tab'
+    import axios from 'axios'
     export default {
-        data () {
-            return {
-                data: [
-                    {
-                        title: 'This is title 1',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 2',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    },
-                    {
-                        title: 'This is title 3',
-                        description: 'This is description, this is description, this is description.',
-                        avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-                        content: 'This is the content, this is the content, this is the content, this is the content.'
-                    }
-                ]
-            }
+        components: {
+            HomeTab,
         },
-        mounted(){
-            this.get()
+        data () {
+		  return {
+            news:[],
+            len:null
+		  }
         },
         methods:{
-            get(){
-                axios.post("http://localhost:10000/user/user/message")
-                .then(function (res) {console.log(res.data)})
-            　　}
-        }
+            getNewsInfo: function() {
+		    axios.post('http://localhost:10000/user/user/message')
+		      .then((res)=>{
+                  console.log(res.data)
+                   
+                  this.len=res.data.data.length;
+                  this.news = res.data.data;
+              })
+          },
+          
+        },
+        mounted () {
+		  this.getNewsInfo()
+		},
     }
 </script>
