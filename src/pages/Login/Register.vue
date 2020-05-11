@@ -46,7 +46,7 @@ export default {
           return
         }
         // 验证通过并注册成功则跳转到主界面
-        this.$router.push("/")
+        this.$router.push("/Login")
       })
     },
     register: function (e) {
